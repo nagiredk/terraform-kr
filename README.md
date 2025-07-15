@@ -1,0 +1,2 @@
+# terraform-kr
+terraform practice
