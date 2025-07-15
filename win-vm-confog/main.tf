@@ -12,10 +12,10 @@ terraform {
 #https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/service_principal_client_secret
 provider "azurerm" {
   features {} 
-  #client_id       = ""
-  #client_secret   = ""
-  tenant_id       = ""
-  subscription_id = ""
+ # client_id       = ""
+ # client_secret   = ""
+  tenant_id       = "7b405feb-d7a9-4415-830e-ef185c6fbafd"
+  subscription_id = "af2e131e-4ce2-4daa-bccd-e6459adb00de"
 }
 
 #create resource group
