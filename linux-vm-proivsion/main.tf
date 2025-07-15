@@ -1,20 +1,27 @@
+resource "azurerm_linux_virtual_machine" "main" {
+  name                = "${var.prefix}-rhel-vm"
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
+  size                = "Standard_B1s"
+  admin_username      = "adminuser"
+  admin_password      = "P@ssword1234!"  # 👉 Use a strong password
 
-terraform {
-  required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "~> 3.0"
-    }
+  network_interface_ids = [
+    azurerm_network_interface.nic1.id
+  ]
+
+  source_image_reference {
+    publisher = "RedHat"
+    offer     = "RHEL"
+    sku       = "9_4"
+    version   = "latest"
   }
-}
 
-provider "azurerm" {
-  features {}
-  skip_provider_registration = true
-}
+  os_disk {
+    name                 = "${var.prefix}-osdisk"
+    caching              = "ReadWrite"
+    storage_account_type = "Standard_LRS"
+  }
 
-resource "azurerm_resource_group" "example" {
-  name     = var.resource_group_name
-  location = var.location
-  tags     = var.tags
+  disable_password_authentication = false  # 👉 Enable password auth
 }
